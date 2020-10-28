@@ -49,6 +49,8 @@ export type StateFromReducersMapObject<M> = M extends ReducersMapObject
   ? { [P in keyof M]: M[P] extends Reducer<infer S, any> ? S : never }
   : never
 
+// 这里可以学一招，在映射类型里，infer 会推断出联合类型。
+// 官方文档讲这个的在哪里我找到了补一下。
 /**
  * Infer reducer union type from a `ReducersMapObject`.
  *
