@@ -12,6 +12,7 @@ import '../utils/symbol-observable'
  * Reference for future devs:
  * https://github.com/microsoft/TypeScript/issues/31751#issuecomment-498526919
  */
+// 这里要注意的是 never | 'a' 的联合类型结果就是 'a'。
 export type ExtendState<State, Extension> = [Extension] extends [never]
   ? State
   : State & Extension
@@ -19,6 +20,7 @@ export type ExtendState<State, Extension> = [Extension] extends [never]
 /**
  * Internal "virtual" symbol used to make the `CombinedState` type unique.
  */
+// unique symbol 可以标识跟踪这个 symbol 的具体类型，与普通的 symbol 区分开来。
 declare const $CombinedState: unique symbol
 
 /**
@@ -37,6 +39,7 @@ declare const $CombinedState: unique symbol
  * typed as always undefined, so its never expected to have a meaningful
  * value anyway. It just makes this type distinquishable from plain `{}`.
  */
+// 这个技巧真的让人大开眼界，要好好琢磨一下。
 export type CombinedState<S> = { readonly [$CombinedState]?: undefined } & S
 
 /**
