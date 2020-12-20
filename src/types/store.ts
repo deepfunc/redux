@@ -129,6 +129,8 @@ export type Observer<T> = {
  * @template StateExt any extension to state from store enhancers
  * @template Ext any extensions to the store from store enhancers
  */
+// StateExt 是增强添加到 state 上的额外内容，比如 devtools 这种。
+// Exit 是增强添加到 store 本身上的属性或者方法。
 export interface Store<
   S = any,
   A extends Action = AnyAction,
