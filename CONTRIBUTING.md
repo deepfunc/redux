@@ -74,7 +74,7 @@ Improvements to the documentation are always welcome. You can find them in the [
 
 ### Examples
 
-Redux comes with [official examples](http://redux.js.org/docs/introduction/Examples.html) to demonstrate various concepts and best practices.
+Redux comes with [official examples](https://redux.js.org/introduction/examples) to demonstrate various concepts and best practices.
 
 When adding a new example, please adhere to the style and format of the existing examples, and try to reuse as much code as possible. For example, `index.html`, `server.js`, and `webpack.config.js` can typically be reused.
 
@@ -88,7 +88,7 @@ npm run examples:test
 
 Not all examples have tests. If you see an example project without tests, you are very welcome to add them in a way consistent with the examples that have tests.
 
-Please visit the [Examples page](http://redux.js.org/docs/introduction/Examples.html) for information on running individual examples.
+Please visit the [Examples page](https://redux.js.org/introduction/examples) for information on running individual examples.
 
 ### Sending a Pull Request
 

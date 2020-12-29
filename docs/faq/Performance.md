@@ -1,7 +1,6 @@
 ---
 id: performance
 title: Performance
-sidebar_label: Performance
 hide_title: true
 ---
 
@@ -9,12 +8,21 @@ hide_title: true
 
 ## Table of Contents
 
-- [How well does Redux “scale” in terms of performance and architecture?](#how-well-does-redux-scale-in-terms-of-performance-and-architecture)
-- [Won't calling “all my reducers” for each action be slow?](#wont-calling-all-my-reducers-for-each-action-be-slow)
-- [Do I have to deep-clone my state in a reducer? Isn't copying my state going to be slow?](#do-i-have-to-deep-clone-my-state-in-a-reducer-isnt-copying-my-state-going-to-be-slow)
-- [How can I reduce the number of store update events?](#how-can-i-reduce-the-number-of-store-update-events)
-- [Will having “one state tree” cause memory problems? Will dispatching many actions take up memory?](#will-having-one-state-tree-cause-memory-problems-will-dispatching-many-actions-take-up-memory)
-- [Will caching remote data cause memory problems?](#will-caching-remote-data-cause-memory-problems)
+- [Redux FAQ: Performance](#redux-faq-performance)
+  - [Table of Contents](#table-of-contents)
+  - [Performance](#performance)
+    - [How well does Redux “scale” in terms of performance and architecture?](#how-well-does-redux-scale-in-terms-of-performance-and-architecture)
+      - [Further information](#further-information)
+    - [Won't calling “all my reducers” for each action be slow?](#wont-calling-all-my-reducers-for-each-action-be-slow)
+      - [Further information](#further-information-1)
+    - [Do I have to deep-clone my state in a reducer? Isn't copying my state going to be slow?](#do-i-have-to-deep-clone-my-state-in-a-reducer-isnt-copying-my-state-going-to-be-slow)
+      - [Further information](#further-information-2)
+    - [How can I reduce the number of store update events?](#how-can-i-reduce-the-number-of-store-update-events)
+      - [Further information](#further-information-3)
+    - [Will having “one state tree” cause memory problems? Will dispatching many actions take up memory?](#will-having-one-state-tree-cause-memory-problems-will-dispatching-many-actions-take-up-memory)
+      - [Further information](#further-information-4)
+    - [Will caching remote data cause memory problems?](#will-caching-remote-data-cause-memory-problems)
+      - [Further information](#further-information-5)
 
 ## Performance
 
@@ -116,17 +124,17 @@ For React-Redux specifically, starting in [React-Redux v7](https://github.com/re
 
 Since React-Redux needs to work in both ReactDOM and React Native environments, we've taken care of importing this API from the correct renderer at build time for our own use. We also now re-export this function publicly ourselves, renamed to `batch()`. You can use it to ensure that multiple actions dispatched outside of React only result in a single render update, like this:
 
-```
-import { batch } from "react-redux";
+```js
+import { batch } from 'react-redux'
 
 function myThunk() {
-    return (dispatch, getState) => {
-        // should only result in one combined re-render, not two
-        batch(() => {
-            dispatch(increment());
-            dispatch(increment());
-        })
-    }
+  return (dispatch, getState) => {
+    // should only result in one combined re-render, not two
+    batch(() => {
+      dispatch(increment())
+      dispatch(increment())
+    })
+  }
 }
 ```
 
@@ -155,7 +163,7 @@ Redux does not store a history of actions itself. However, the Redux DevTools do
 
 **Documentation**
 
-- [Docs: Async Actions](../advanced/AsyncActions.md)
+- [Redux Fundamentals: Async Logic and Data Flow](../tutorials/fundamentals/part-6-async-logic.md)
 
 **Discussions**
 
@@ -175,7 +183,7 @@ First, only cache as much data as the user needs. If your application displays a
 
 Second, cache an abbreviated form of a record when possible. Sometimes a record includes data that is not relevant to the user. If the application does not depend on this data, it can be omitted from the cache.
 
-Third, only cache a single copy of a record. This is especially important when records contain copies of other records. Cache a unique copy for each record and replace each nested copy with a reference. This is called normalization. Normalization is the preferred approach to storing relational data for [several reasons](../recipes/reducers/NormalizingStateShape.md#designing-a-normalized-state), including efficient memory consumption.
+Third, only cache a single copy of a record. This is especially important when records contain copies of other records. Cache a unique copy for each record and replace each nested copy with a reference. This is called normalization. Normalization is the preferred approach to storing relational data for [several reasons](../recipes/structuring-reducers/NormalizingStateShape.md#designing-a-normalized-state), including efficient memory consumption.
 
 #### Further information
 

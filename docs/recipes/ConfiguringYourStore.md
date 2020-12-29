@@ -1,15 +1,14 @@
 ---
 id: configuring-your-store
 title: Configuring Your Store
-sidebar_label: Configuring Your Store
 hide_title: true
 ---
 
 # Configuring Your Store
 
-In the [basics section](../basics/README.md), we introduced the fundamental Redux concepts by building an example Todo list app.
+In the ["Redux Fundamentals" tutorial](../tutorials/fundamentals/part-1-overview.md), we introduced the fundamental Redux concepts by building an example Todo list app. As part of that, we talked about [how to create and configure a Redux store](../tutorials/fundamentals/part-4-store.md).
 
-We will now explore how to customise the store to add extra functionality. We'll start with the source code from the basics section, which you can view in [the documentation](../basics/ExampleTodoList.md), in [our repository of examples](https://github.com/reduxjs/redux/tree/master/examples/todos/src), or [in your browser via CodeSandbox](https://codesandbox.io/s/github/reduxjs/redux/tree/master/examples/todos).
+We will now explore how to customise the store to add extra functionality. We'll start with the source code from ["Redux Fundamentals" part 5: UI and React](../tutorials/fundamentals/part-5-ui-and-react.md). You can view the source from this stage of the tutorial in [the example app repository on Github](https://github.com/reduxjs/redux-fundamentals-example-app/tree/checkpoint-5-uiAllActions), or [in your browser via CodeSandbox](https://codesandbox.io/s/github/reduxjs/redux-fundamentals-example-app/tree/checkpoint-5-uiAllActions/).
 
 ## Creating the store
 
@@ -50,7 +49,7 @@ We will add two middlewares and one enhancer:
 #### Install `redux-thunk`
 
 ```sh
-npm install --save redux-thunk
+npm install redux-thunk
 ```
 
 #### middleware/logger.js
@@ -117,10 +116,7 @@ import monitorReducerEnhancer from './enhancers/monitorReducer'
 import App from './components/App'
 
 const middlewareEnhancer = applyMiddleware(loggerMiddleware, thunkMiddleware)
-const composedEnhancers = compose(
-  middlewareEnhancer,
-  monitorReducerEnhancer
-)
+const composedEnhancers = compose(middlewareEnhancer, monitorReducerEnhancer)
 
 const store = createStore(rootReducer, undefined, composedEnhancers)
 
@@ -317,7 +313,7 @@ renderApp()
 
 The only extra change here is that we have encapsulated our app's rendering into a new `renderApp` function, which we now call to re-render the app.
 
-## Simplifying Setup with Redux Starter Kit
+## Simplifying Setup with Redux Toolkit
 
 The Redux core library is deliberately unopinionated. It lets you decide how you want to handle everything, like store
 setup, what your state contains, and how you want to build your reducers.
@@ -325,16 +321,16 @@ setup, what your state contains, and how you want to build your reducers.
 This is good in some cases, because it gives you flexibility, but that flexibility isn't always needed. Sometimes we
 just want the simplest possible way to get started, with some good default behavior out of the box.
 
-The [Redux Starter Kit](https://redux-starter-kit.js.org/) package is designed to help simplify several common Redux use cases, including store setup.
+The [Redux Toolkit](https://redux-toolkit.js.org/) package is designed to help simplify several common Redux use cases, including store setup.
 Let's see how it can help improve the store setup process.
 
-Redux Starter Kit includes a prebuilt [`configureStore` function](https://redux-starter-kit.js.org/api/configureStore) like
+Redux Toolkit includes a prebuilt [`configureStore` function](https://redux-toolkit.js.org/api/configureStore) like
 the one shown in the earlier examples.
 
 The fastest way to use is it is to just pass the root reducer function:
 
 ```js
-import { configureStore } from 'redux-starter-kit'
+import { configureStore } from '@reduxjs/toolkit'
 import rootReducer from './reducers'
 
 const store = configureStore({
@@ -346,15 +342,15 @@ export default store
 
 Note that it accepts an object with named parameters, to make it clearer what you're passing in.
 
-By default, `configureStore` from Redux Starter Kit will:
+By default, `configureStore` from Redux Toolkit will:
 
-- Call `applyMiddleware` with [a default list of middleware, including `redux-thunk`](https://redux-starter-kit.js.org/api/getDefaultMiddleware), and some development-only middleware that catch common mistakes like mutating state
+- Call `applyMiddleware` with [a default list of middleware, including `redux-thunk`](https://redux-toolkit.js.org/api/getDefaultMiddleware), and some development-only middleware that catch common mistakes like mutating state
 - Call `composeWithDevTools` to set up the Redux DevTools Extension
 
-Here's what the hot reloading example might look like using Redux Starter Kit:
+Here's what the hot reloading example might look like using Redux Toolkit:
 
 ```js
-import { configureStore, getDefaultMiddleware } from 'redux-starter-kit'
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit'
 
 import monitorReducersEnhancer from './enhancers/monitorReducers'
 import loggerMiddleware from './middleware/logger'
@@ -380,4 +376,4 @@ That definitely simplifies some of the setup process.
 
 ## Next Steps
 
-Now that you know how to encapsulate your store configuration to make it easier to maintain, you can [learn more about the advanced features Redux provides](../advanced/README.md), or take a closer look at some of the [extensions available in the Redux ecosystem](../introduction/Ecosystem.md#debuggers-and-viewers).
+Now that you know how to encapsulate your store configuration to make it easier to maintain, you can [look at the Redux Toolkit `configureStore` API](https://redux-toolkit.js.org/api/configureStore), or take a closer look at some of the [extensions available in the Redux ecosystem](../introduction/Ecosystem.md#debuggers-and-viewers).

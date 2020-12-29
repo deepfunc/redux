@@ -1,7 +1,6 @@
 ---
 id: computing-derived-data
 title: Computing Derived Data
-sidebar_label: Computing Derived Data
 hide_title: true
 ---
 
@@ -11,7 +10,7 @@ hide_title: true
 
 ### Motivation for Memoized Selectors
 
-Let's revisit the [Todos List example](../basics/UsageWithReact.md):
+Let's revisit the [Todos List example](../tutorials/fundamentals/part-5-ui-and-react.md):
 
 #### `containers/VisibleTodoList.js`
 
@@ -45,10 +44,7 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-const VisibleTodoList = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(TodoList)
+const VisibleTodoList = connect(mapStateToProps, mapDispatchToProps)(TodoList)
 
 export default VisibleTodoList
 ```
@@ -128,10 +124,7 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-const VisibleTodoList = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(TodoList)
+const VisibleTodoList = connect(mapStateToProps, mapDispatchToProps)(TodoList)
 
 export default VisibleTodoList
 ```
@@ -381,10 +374,7 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-const VisibleTodoList = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(TodoList)
+const VisibleTodoList = connect(mapStateToProps, mapDispatchToProps)(TodoList)
 
 export default VisibleTodoList
 ```
