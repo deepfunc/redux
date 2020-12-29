@@ -264,9 +264,11 @@ export interface StoreCreator {
  * @template Ext Store extension that is mixed into the Store type.
  * @template StateExt State extension that is mixed into the state type.
  */
+// StoreEnhancer 其实就是接收一个 createStore 作为参数，返回另一个 createStore 为结果的函数。
 export type StoreEnhancer<Ext = {}, StateExt = never> = (
   next: StoreEnhancerStoreCreator<Ext, StateExt>
 ) => StoreEnhancerStoreCreator<Ext, StateExt>
+
 export type StoreEnhancerStoreCreator<Ext = {}, StateExt = never> = <
   S = any,
   A extends Action = AnyAction

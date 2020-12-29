@@ -76,7 +76,11 @@ export default function applyMiddleware(
       getState: store.getState,
       dispatch: (action, ...args) => dispatch(action, ...args)
     }
+
+    // 上面的防止在构建中间件过程的时候调用 dispatch 指的就是这一行。
     const chain = middlewares.map(middleware => middleware(middlewareAPI))
+
+    // 这里是可以调用 dispatch 的，因为调用只会影响往右的中间件，而这个时候右边的中间件已经准备好了。
     dispatch = compose<typeof dispatch>(...chain)(store.dispatch)
 
     return {
